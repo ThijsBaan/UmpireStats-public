@@ -1,6 +1,6 @@
 # Privacy Policy for UmpireStats
 
-**Last updated: 26 July 2026**
+**Last updated: July 2026**
 
 UmpireStats is developed by Thijs Baan.
 
@@ -65,4 +65,4 @@ You also have the right to lodge a complaint with your local data protection aut
 
 For privacy questions or requests:
 
-**[umpirestats@gmail.com](mailto:umpirestats@gmail.com)**
+**[UmpireStats.app@gmail.com](mailto:UmpireStats.app@gmail.com)**
