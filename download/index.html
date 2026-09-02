@@ -66,9 +66,8 @@
       box-shadow: var(--shadow);
     }
 
-    /* Asset slot for step 2. Kept hidden until the logo file is added. */
     .brand-logo {
-      display: none;
+      display: block;
       width: 118px;
       height: 118px;
       object-fit: contain;
@@ -146,6 +145,7 @@
     @media (max-width: 560px) {
       body { padding: 18px 14px; }
       .card { padding: 36px 22px 32px; border-radius: 24px; }
+      .brand-logo { width: 104px; height: 104px; }
       .lead { margin-bottom: 28px; }
       .stores { flex-direction: column; }
       .store-link { width: 100%; }
