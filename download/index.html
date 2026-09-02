@@ -19,7 +19,8 @@
       const ua = navigator.userAgent || '';
       const platform = navigator.userAgentData?.platform || navigator.platform || '';
       const isAndroid = /android/i.test(ua) || /android/i.test(platform);
-      const isIOS = /iPad|iPhone|iPod/i.test(ua) || (/Mac/i.test(platform) && navigator.maxTouchPoints > 1);
+      const isIOS = /iPad|iPhone|iPod/i.test(ua)
+        || (/Mac/i.test(platform) && navigator.maxTouchPoints > 1);
 
       if (isAndroid) window.location.replace(playStore);
       else if (isIOS) window.location.replace(appStore);
@@ -34,11 +35,11 @@
       --page: #eef2f7;
       --card: #fff;
       --line: #d7dce4;
+      --button: #111317;
       --shadow: 0 24px 64px rgba(24, 39, 58, .14);
     }
 
     * { box-sizing: border-box; }
-
     html, body { margin: 0; min-height: 100%; }
 
     body {
@@ -65,8 +66,9 @@
       box-shadow: var(--shadow);
     }
 
+    /* Asset slot for step 2. Kept hidden until the logo file is added. */
     .brand-logo {
-      display: block;
+      display: none;
       width: 118px;
       height: 118px;
       object-fit: contain;
@@ -104,24 +106,33 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 16px 18px;
+      gap: 14px;
     }
 
     .store-link {
+      min-width: 210px;
+      min-height: 58px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: 10px;
+      padding: 14px 22px;
+      border-radius: 14px;
+      color: #fff;
+      background: var(--button);
       text-decoration: none;
+      font-size: 17px;
+      font-weight: 700;
       transition: transform 150ms ease, filter 150ms ease;
     }
 
-    .store-link:hover { transform: translateY(-2px); filter: brightness(1.06); }
+    .store-link:hover { transform: translateY(-2px); filter: brightness(1.12); }
     .store-link:active { transform: translateY(0); }
     .store-link:focus-visible { outline: 4px solid rgba(11, 92, 173, .22); outline-offset: 4px; }
 
-    .apple-badge { display: block; width: 188px; height: auto; }
-    .google-badge { display: block; width: 218px; height: auto; }
+    /* Asset slots for step 3. Official artwork will replace the text fallback. */
+    .store-badge { display: none; height: auto; }
+    .apple-badge { width: 188px; }
+    .google-badge { width: 218px; }
 
     footer {
       margin-top: 18px;
@@ -135,11 +146,9 @@
     @media (max-width: 560px) {
       body { padding: 18px 14px; }
       .card { padding: 36px 22px 32px; border-radius: 24px; }
-      .brand-logo { width: 104px; height: 104px; }
       .lead { margin-bottom: 28px; }
-      .stores { flex-direction: column; gap: 8px; }
-      .apple-badge { width: 190px; }
-      .google-badge { width: 220px; }
+      .stores { flex-direction: column; }
+      .store-link { width: 100%; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -152,23 +161,29 @@
     <section class="card" aria-labelledby="title">
       <img
         class="brand-logo"
-        src="data:image/png;base64,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[... truncated for brevity ...]" alt="UmpireStats logo">
+        src="/assets/umpirestats-logo.png"
+        alt="UmpireStats logo">
 
       <p class="eyebrow">UmpireStats</p>
       <h1 id="title">Download de app</h1>
       <p class="lead">Houd je wedstrijden, reflecties en statistieken overzichtelijk bij. Kies jouw platform om UmpireStats gratis te downloaden.</p>
 
-      <div class="stores" aria-label="Download UmpireStats">
+      <div class="stores" aria-label="Downloadmogelijkheden">
         <a class="store-link" href="https://apps.apple.com/nl/app/umpirestats/id6804798198" aria-label="Download UmpireStats in de App Store">
-          <img class="apple-badge" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/nl-nl?size=250x83" alt="Download in de App Store">
+          <img class="store-badge apple-badge" src="/assets/badges/app-store-badge-nl.svg" alt="Download in de App Store">
+          <span class="store-fallback">App Store</span>
         </a>
+
         <a class="store-link" href="https://play.google.com/store/apps/details?id=nl.baan.umpirestats" aria-label="Download UmpireStats via Google Play">
-          <img class="google-badge" src="https://play.google.com/intl/en_us/badges/static/images/badges/nl_badge_web_generic.png" alt="Ontdek het op Google Play">
+          <img class="store-badge google-badge" src="/assets/badges/google-play-badge.png" alt="Download via Google Play">
+          <span class="store-fallback">Google Play</span>
         </a>
       </div>
     </section>
 
-    <footer><a href="/privacy/">Privacy</a></footer>
+    <footer>
+      <a href="/privacy/">Privacy</a>
+    </footer>
   </main>
 </body>
 </html>
