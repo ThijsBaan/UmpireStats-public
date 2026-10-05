@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "nl.baan.umpirestats",
+      "sha256_cert_fingerprints": [
+        "1A:7F:50:8B:E0:19:95:B3:FC:1D:1D:75:97:C2:44:E4:3E:19:D5:F1:BA:E8:58:D2:A4:E8:AD:A9:17:30:64:11"
+      ]
+    }
+  }
+]
